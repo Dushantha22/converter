@@ -1,0 +1,704 @@
+:root {
+    --bs-text-color: #b8b8b8;
+    --bs-body-bg: #0f172a;
+    --bs-body-color: #e2e8f0;
+    --bs-primary: #3b82f6;
+    --bs-dark-card: #1e293b;
+    --bs-input-bg: #334155;
+    --bs-card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --bs-button-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --bs-text-primary: #e2e8f0;
+    --bs-text-secondary: #94a3b8;
+
+    color-scheme: dark;
+}
+
+*,
+*:before,
+*:after {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+/* Global animations */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth page transitions */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse animation for loading states */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-text-color);
+    background-color: var(--bs-body-bg) !important;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    /* make space for fixed navbar */
+}
+
+/* Start Screen */
+.start-screen {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--bs-body-bg) !important;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.start-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wox-logo {
+    width: 180px;
+    max-width: 60%;
+    transition: all 1s ease-in-out;
+}
+
+.wox-logo:hover {
+    transform: rotate(360deg);
+}
+
+.getStartedBtn {
+    background-color: var(--bs-primary);
+    color: var(--bs-body-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    font-size: 1rem;
+}
+
+.getStartedBtn:hover {
+    background-color: var(--bs-primary);
+    box-shadow: 0 0 1rem var(--bs-primary);
+}
+
+/* Responsive Logo/Text/Button */
+@media (max-width: 576px) {
+    .wox-logo {
+        width: 120px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .slogan {
+        font-size: 1rem;
+    }
+
+    .getStartedBtn {
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .start-content {
+        padding: 0 1rem;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+    .wox-logo {
+        width: 150px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .slogan {
+        font-size: 1.1rem;
+    }
+
+    .getStartedBtn {
+        font-size: 1rem;
+        padding: 0.875rem 2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .wox-logo {
+        width: 200px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .slogan {
+        font-size: 1.25rem;
+    }
+
+    .getStartedBtn {
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+    }
+}
+
+/* Navbar */
+.bg-dark-custom {
+    background-color: var(--bs-dark-card) !important;
+}
+
+.conversion-interface {
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    background: linear-gradient(145deg, rgba(30, 58, 138, 0.95) 0%, rgba(76, 29, 149, 0.9) 100%);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.conversion-interface::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: -200% 0; }
+    50% { background-position: 200% 0; }
+}
+
+/* Enhanced Input/Select Fields */
+.form-control,
+.form-select {
+    background: rgba(15, 23, 42, 0.8) !important;
+    color: #e2e8f0 !important;
+    border: 2px solid #475569;
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
+    min-height: 60px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 
+        0 0 0 4px rgba(59, 130, 246, 0.2),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: rgba(15, 23, 42, 0.9) !important;
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+/* Input labels and text styling */
+.input-label {
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.input-value {
+    color: #e2e8f0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Enhanced Converter buttons */
+.converter-buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.converter-select-button {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #e2e8f0;
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid #475569;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    min-width: 140px;
+    text-align: center;
+}
+
+.converter-select-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.converter-select-button:hover:not(.active) {
+    background: rgba(30, 58, 138, 0.6);
+    color: #bfdbfe;
+    border-color: #3b82f6;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px -8px rgba(59, 130, 246, 0.4);
+}
+
+.converter-select-button:hover:not(.active)::before {
+    left: 100%;
+}
+
+.converter-select-button.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    color: white;
+    border-color: #3b82f6;
+    box-shadow: 
+        0 12px 25px -8px rgba(59, 130, 246, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Enhanced Switch button */
+.switch-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+#switch-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+    border: 3px solid rgba(255, 255, 255, 0.2) !important;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 15px 35px -8px rgba(59, 130, 246, 0.4),
+        0 0 0 1px rgba(59, 130, 246, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+#switch-button:hover {
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 
+        0 20px 45px -8px rgba(59, 130, 246, 0.6),
+        0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+#switch-button:active {
+    transform: rotate(180deg) scale(0.95);
+}
+
+#switch-button i {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Conversion result styling */
+.conversion-result {
+    background: rgba(15, 23, 42, 0.9);
+    border: 2px solid #3b82f6;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    box-shadow: 
+        0 15px 35px -8px rgba(59, 130, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.result-text {
+    color: #3b82f6;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.result-value {
+    color: #e2e8f0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Updated for Dark Mode (Original overrides will apply if placed after this) */
+/* The key here is to keep the variable definitions for dark mode at the top in :root, 
+   and then any specific elements that need different styling in light mode would have 
+   their own overrides within a light mode specific class or media query. 
+   Since you provided a dark CSS already, I'm assuming the goal is to refactor it to be 
+   more compact and responsive while maintaining the dark aesthetic. 
+   The following updates reflect making the existing dark mode more compact and responsive,
+   as your second CSS block seems to be aiming for.
+*/
+
+.conversion-interface {
+    width: 100%;
+    max-width: 1000px; /* Reduced from 1200px */
+    margin: 2rem auto; /* Reduced margin */
+    background: linear-gradient(145deg, rgba(30, 58, 138, 0.95) 0%, rgba(76, 29, 149, 0.9) 100%); /* Retain dark gradient */
+    backdrop-filter: blur(20px); /* Slightly reduced blur */
+    border-radius: 20px; /* Slightly smaller radius */
+    padding: 2rem; /* Reduced padding */
+    box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.4), /* Lighter shadow */
+        0 0 0 1px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Compact Input/Select Fields */
+.form-control,
+.form-select {
+    background: rgba(15, 23, 42, 0.85) !important; /* Darker background */
+    color: #e2e8f0 !important;
+    border: 1.5px solid #475569; /* Thinner border */
+    padding: 0.875rem 1.25rem; /* Reduced padding */
+    border-radius: 12px; /* Smaller radius */
+    font-size: 0.95rem; /* Slightly smaller font */
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease; /* Faster transition */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    height: auto;
+    min-height: 50px; /* Reduced height */
+    line-height: 1.4;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3b82f6; /* Keep primary blue border */
+    box-shadow: 
+        0 0 0 3px rgba(59, 130, 246, 0.15), /* Smaller focus shadow */
+        inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    background: rgba(15, 23, 42, 0.95) !important; /* Darker background on focus */
+    transform: translateY(-1px); /* Smaller lift */
+    outline: none;
+}
+
+/* Compact labels */
+.input-label {
+    color: #94a3b8; /* Keep text secondary for labels in dark mode */
+    font-weight: 600;
+    font-size: 0.9rem; /* Smaller font */
+    margin-bottom: 0.5rem; /* Reduced margin */
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.3px; /* Tighter spacing */
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.input-value {
+    color: #e2e8f0;
+    font-size: 1.1rem; /* Smaller font */
+    font-weight: 600; /* Slightly less bold */
+    margin-top: 0.25rem; /* Reduced margin */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+}
+
+/* More compact converter buttons */
+.converter-buttons-container {
+    display: flex;
+    gap: 0.75rem; /* Tighter gap */
+    margin-bottom: 2rem; /* Reduced margin */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.converter-select-button {
+    transition: all 0.3s ease;
+    color: #e2e8f0;
+    background: rgba(15, 23, 42, 0.85); /* Dark background */
+    border: 1.5px solid #475569; /* Thinner border */
+    padding: 0.75rem 1.5rem; /* Reduced padding */
+    border-radius: 40px; /* Slightly smaller */
+    font-weight: 600;
+    font-size: 0.9rem; /* Smaller font */
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    min-width: 120px; /* Smaller minimum width */
+    text-align: center;
+}
+
+.converter-select-button:hover:not(.active) {
+    background: rgba(30, 58, 138, 0.7); /* Darker hover background */
+    color: #bfdbfe;
+    border-color: #3b82f6;
+    transform: translateY(-2px); /* Smaller lift */
+    box-shadow: 0 8px 20px -6px rgba(59, 130, 246, 0.3);
+}
+
+.converter-select-button.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); /* Retain gradient for active */
+    color: white;
+    border-color: #3b82f6;
+    box-shadow: 
+        0 8px 20px -6px rgba(59, 130, 246, 0.4),
+        0 0 0 1px rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px); /* Smaller lift */
+}
+
+/* More compact switch button */
+.switch-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0; /* Reduced margin */
+    position: relative;
+}
+
+#switch-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important; /* Retain gradient */
+    border: 2px solid rgba(255, 255, 255, 0.2) !important; /* Thinner border */
+    width: 50px; /* Smaller */
+    height: 50px; /* Smaller */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 10px 25px -6px rgba(59, 130, 246, 0.3),
+        0 0 0 1px rgba(59, 130, 246, 0.15);
+    position: relative;
+    z-index: 2;
+}
+
+#switch-button:hover {
+    transform: rotate(180deg) scale(1.05); /* Smaller scale */
+    box-shadow: 
+        0 12px 30px -6px rgba(59, 130, 246, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+#switch-button i {
+    color: white;
+    font-size: 1.2rem; /* Smaller icon */
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Compact conversion result */
+.conversion-result {
+    background: rgba(15, 23, 42, 0.9); /* Dark background */
+    border: 1.5px solid #3b82f6; /* Thinner border */
+    border-radius: 16px; /* Smaller radius */
+    padding: 1.5rem; /* Reduced padding */
+    margin-top: 1.5rem; /* Reduced margin */
+    text-align: center;
+    box-shadow: 
+        0 10px 25px -6px rgba(59, 130, 246, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.result-text {
+    color: #3b82f6; /* Primary blue for result text */
+    font-size: 0.95rem; /* Smaller font */
+    font-weight: 600;
+    margin-bottom: 0.25rem; /* Reduced margin */
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Tighter spacing */
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.result-value {
+    color: #e2e8f0;
+    font-size: 2rem; /* Smaller font */
+    font-weight: 700; /* Slightly less bold */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Improved responsive design */
+@media (max-width: 767px) {
+    .conversion-interface {
+        margin: 1.5rem 0.75rem !important;
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+    
+    .conversion-interface .row {
+        flex-direction: column;
+        gap: 1rem; /* Tighter gap */
+    }
+    
+    .converter-buttons-container {
+        gap: 0.5rem; /* Tighter gap */
+    }
+    
+    .converter-select-button {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.85rem;
+        min-width: 100px; /* Smaller minimum width */
+        flex: 1;
+    }
+    
+    .form-control,
+    .form-select {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        min-height: 45px; /* Smaller height */
+    }
+    
+    .input-value {
+        font-size: 1rem;
+    }
+    
+    .result-value {
+        font-size: 1.75rem;
+    }
+    
+    #switch-button {
+        width: 45px;
+        height: 45px;
+        margin: 0.75rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .conversion-interface {
+        margin: 1rem 0.5rem !important;
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .converter-select-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        min-width: 90px;
+    }
+    
+    .form-control,
+    .form-select {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.85rem;
+    }
+    
+    .input-value {
+        font-size: 0.95rem;
+    }
+    
+    .result-value {
+        font-size: 1.5rem;
+    }
+}
+
+/* Better spacing for form groups */
+.form-group {
+    margin-bottom: 1.5rem; /* Consistent spacing */
+}
+
+/* Improved focus states for better accessibility */
+.form-control:focus-visible,
+.form-select:focus-visible {
+    outline: 2px solid #3b82f6; /* Primary blue for outline */
+    outline-offset: 1px;
+}
+
+/* Better placeholder styling */
+.form-control::placeholder,
+.form-select::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+    font-size: 0.9rem; /* Smaller placeholder */
+    opacity: 0.7;
+}
